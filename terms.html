@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Privacy — RoadCommand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --green:#5edc82; --gold:#ffd04d; --dark:#0e1210; --surface:#161a16; --border:rgba(255,255,255,0.08); --text:#f0f4f0; --muted:rgba(240,244,240,0.55); }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--dark); color:var(--text); font-family:'Barlow',sans-serif; overflow-x:hidden; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; background:rgba(14,18,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); gap:1rem; }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.12em; color:var(--green); text-decoration:none; }
+.nav-logo span { color:var(--gold); }
+.nav-links { display:flex; gap:2rem; }
+.nav-links a { color:var(--muted); text-decoration:none; font-size:.88rem; letter-spacing:.06em; text-transform:uppercase; font-family:'Barlow Condensed',sans-serif; font-weight:600; }
+.nav-cta { background:var(--green); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; padding:.5rem 1.3rem; text-decoration:none; }
+.nav-hamburger { display:none; background:none; border:none; color:var(--gold); font-size:1.4rem; cursor:pointer; }
+.mobile-menu { display:none; position:fixed; top:64px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); z-index:99; flex-direction:column; padding:1rem 2rem; gap:1rem; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { color:var(--text); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.1rem; letter-spacing:.06em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid var(--border); }
+@media(max-width:700px) { .nav-links { display:none; } .nav-hamburger { display:block; } .nav-cta { display:none; } }
+
+.legal-hero { padding:8rem 2rem 3rem; text-align:center; border-bottom:1px solid var(--border); }
+.legal-hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,7vw,5rem); letter-spacing:.04em; color:var(--text); margin-bottom:.5rem; }
+.legal-hero p { font-size:.85rem; color:var(--muted); }
+
+.legal-nav { display:flex; gap:2rem; justify-content:center; padding:1.5rem 2rem; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.legal-nav a { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:.9rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); text-decoration:none; }
+.legal-nav a:hover { color:var(--green); }
+
+.legal-body { max-width:780px; margin:0 auto; padding:4rem 2rem 6rem; }
+.legal-section { margin-bottom:3rem; }
+.legal-section h2 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.04em; color:var(--green); margin-bottom:1rem; padding-top:1rem; }
+.legal-section h3 { font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; margin-top:1.5rem; }
+.legal-section p { font-size:.92rem; color:var(--muted); line-height:1.85; margin-bottom:1rem; }
+.legal-section ul { list-style:none; margin-bottom:1rem; }
+.legal-section ul li { font-size:.92rem; color:var(--muted); line-height:1.8; padding:.2rem 0 .2rem 1.2rem; position:relative; }
+.legal-section ul li::before { content:'·'; position:absolute; left:0; color:var(--gold); }
+.legal-divider { height:1px; background:var(--border); margin:3rem 0; }
+.effective { font-size:.78rem; color:var(--muted); font-style:italic; margin-bottom:2rem; }
+
+footer { background:var(--surface); border-top:1px solid var(--border); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.12em; color:var(--green); }
+.footer-logo span { color:var(--gold); }
+.footer-copy { font-size:.78rem; color:var(--muted); }
+.footer-links { display:flex; gap:1.5rem; }
+.footer-links a { font-size:.78rem; color:var(--muted); text-decoration:none; letter-spacing:.06em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Road<span>Command</span></a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="beta.html">Beta</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="beta.html" class="nav-cta">Get Beta Access</a>
+  <button class="nav-hamburger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="pricing.html" onclick="toggleMenu()">Pricing</a>
+  <a href="beta.html" onclick="toggleMenu()">Beta Access</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+</div>
+
+<div class="legal-hero">
+  <h1>Terms & Privacy</h1>
+  <p>Last updated: April 2026 &nbsp;·&nbsp; RoadCommand LLC &nbsp;·&nbsp; Soap Lake, WA</p>
+</div>
+
+<div class="legal-nav">
+  <a href="#terms">Terms of Service</a>
+  <a href="#privacy">Privacy Policy</a>
+</div>
+
+<div class="legal-body">
+
+  <!-- TERMS -->
+  <div id="terms">
+    <p class="effective">Effective Date: April 2026</p>
+
+    <div class="legal-section">
+      <h2>Terms of Service</h2>
+      <p>These Terms of Service govern your use of RoadCommand, a software platform operated by RoadCommand LLC, a Washington State limited liability company. By accessing or using RoadCommand you agree to be bound by these terms. If you do not agree, do not use the service.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>1. The Service</h3>
+      <p>RoadCommand is a carrier-facing dispatch intelligence platform that provides load evaluation tools, profit calculation, broker information, invoice tracking, and related services to owner-operators and small fleets. The platform is intended for use by carriers operating under their own motor carrier authority.</p>
+      <p>RoadCommand is not a freight broker, dispatcher, or carrier. We do not book loads on your behalf, act as an intermediary in freight transactions, or assume any liability for load bookings made through information provided by the platform.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>2. Subscriptions and Payment</h3>
+      <p>RoadCommand is offered on a monthly subscription basis. Your subscription renews automatically each month until cancelled. You may cancel at any time and your access will continue through the end of the current billing period. No refunds are issued for partial months.</p>
+      <p>We reserve the right to change pricing with 30 days written notice to your registered email address. Continued use after the effective date of a price change constitutes acceptance of the new pricing.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>3. Acceptable Use</h3>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Copy, reproduce, distribute, or resell any portion of the RoadCommand software or data</li>
+        <li>Reverse engineer, decompile, or attempt to extract the source code of the platform</li>
+        <li>Use the platform for any unlawful purpose or in violation of any applicable regulation</li>
+        <li>Share your account credentials with any third party</li>
+        <li>Use automated tools to scrape, harvest, or extract data from the platform</li>
+        <li>Attempt to circumvent any security or access controls</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h3>4. Intellectual Property</h3>
+      <p>RoadCommand and all its features, code, design, algorithms, and content are the exclusive intellectual property of RoadCommand LLC, protected by United States copyright law (Registration No. 1-15145023901) and applicable trademark law. All rights reserved.</p>
+      <p>Nothing in these terms grants you any ownership interest in the platform. You are granted a limited, non-exclusive, non-transferable license to use the platform for your own carrier operations during an active subscription period.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>5. Load Data and Third-Party Sources</h3>
+      <p>Load data displayed within RoadCommand is sourced from third-party load boards including but not limited to Truckstop and 123Loadboard. RoadCommand does not guarantee the accuracy, completeness, or availability of load data. Always verify load details directly with the posting broker before booking.</p>
+      <p>Profit calculations, deadhead estimates, fuel cost projections, and HOS arrival times are estimates based on available data and should be used as guidance tools only. Actual results may vary.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>6. Disclaimer of Warranties</h3>
+      <p>RoadCommand is provided on an as-is and as-available basis without warranties of any kind, express or implied. We do not warrant that the platform will be uninterrupted, error-free, or that any specific results will be achieved through its use.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>7. Limitation of Liability</h3>
+      <p>RoadCommand LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the platform, including but not limited to lost profits, lost loads, or business interruption. Our total liability to you for any claim shall not exceed the amount you paid us in the 30 days preceding the claim.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>8. Termination</h3>
+      <p>We reserve the right to suspend or terminate your access to RoadCommand at any time for violation of these terms. You may cancel your subscription at any time through your account settings or by contacting admin@roadcommand.co.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>9. Governing Law</h3>
+      <p>These terms are governed by the laws of the State of Washington. Any disputes shall be resolved in the courts of Grant County, Washington.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>10. Contact</h3>
+      <p>Questions about these terms should be directed to admin@roadcommand.co or RoadCommand LLC, Soap Lake, WA 98851.</p>
+    </div>
+  </div>
+
+  <div class="legal-divider"></div>
+
+  <!-- PRIVACY -->
+  <div id="privacy">
+    <p class="effective">Effective Date: April 2026</p>
+
+    <div class="legal-section">
+      <h2>Privacy Policy</h2>
+      <p>RoadCommand LLC respects your privacy. This policy explains what information we collect, how we use it, and your rights regarding your data. We do not sell your data. We do not share your data with advertisers. Full stop.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Information We Collect</h3>
+      <p>We collect the following information when you use RoadCommand:</p>
+      <ul>
+        <li>Account information — name, email address, phone number</li>
+        <li>Payment information — processed securely through Stripe, we do not store card details</li>
+        <li>GPS location data — used to calculate deadhead miles and identify your region for fuel prices and weather alerts. Location data is processed on your device and is not stored on our servers.</li>
+        <li>Usage data — features used, loads viewed, loads booked. Used to improve the product.</li>
+        <li>Invoice and load records you enter manually</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h3>How We Use Your Information</h3>
+      <ul>
+        <li>To provide and improve the RoadCommand platform</li>
+        <li>To calculate GPS-based deadhead and fuel costs</li>
+        <li>To send account-related communications</li>
+        <li>To process your subscription payments</li>
+        <li>To respond to your support requests</li>
+      </ul>
+      <p>We do not use your information for advertising. We do not sell your information to any third party. We do not share your route data, load history, or business information with any external parties without your explicit consent.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>GPS and Location Data</h3>
+      <p>RoadCommand requests access to your device GPS to calculate deadhead miles from your current position to load pickup locations and to identify your region for live fuel prices and weather alerts. This data is used in real time on your device. We do not log, store, or transmit your precise GPS coordinates to our servers.</p>
+      <p>You may deny GPS access at any time in your device settings. The platform will function without GPS but deadhead calculations will require manual entry.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Data Security</h3>
+      <p>We use industry-standard security measures to protect your information. Payment processing is handled by Stripe, a PCI-DSS compliant payment processor. We do not store your full payment card details.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Your Rights</h3>
+      <p>You have the right to access, correct, or delete your personal information at any time. To exercise these rights contact admin@roadcommand.co. We will respond within 30 days.</p>
+      <p>If you cancel your subscription you may request deletion of your account data. Load history and invoice records will be deleted within 30 days of your request.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Changes To This Policy</h3>
+      <p>We may update this privacy policy from time to time. We will notify you of significant changes by email to your registered address at least 14 days before the changes take effect.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Contact</h3>
+      <p>Privacy questions or requests should be directed to admin@roadcommand.co or RoadCommand LLC, Soap Lake, WA 98851.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">Road<span>Command</span></div>
+  <div class="footer-copy">© 2026 RoadCommand LLC · Soap Lake, WA · All rights reserved</div>
+  <div class="footer-links">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms</a>
+    <a href="terms.html#privacy">Privacy</a>
+  </div>
+</footer>
+<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}</script>
+</body>
+</html>
