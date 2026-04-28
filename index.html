@@ -49,6 +49,7 @@
   .hero-input::placeholder { color:rgba(240,244,240,.35); }
   .hero-btn { background:var(--gold); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:.08em; text-transform:uppercase; padding:.85rem 1.8rem; border:none; cursor:pointer; transition:background .2s,transform .15s; white-space:nowrap; }
   .hero-btn:hover { background:#ffe07a; transform:translateY(-1px); }
+  .hero-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
   .hero-fine { font-size:.75rem; color:var(--muted); margin-top:.8rem; opacity:0; animation:fadeUp .6s .95s forwards; }
   .ticker { background:var(--green); padding:.6rem 0; overflow:hidden; white-space:nowrap; }
   .ticker-inner { display:inline-flex; animation:ticker 40s linear infinite; gap:0; }
@@ -94,6 +95,7 @@
   .footer-links a { font-size:.78rem; color:var(--muted); text-decoration:none; letter-spacing:.06em; text-transform:uppercase; transition:color .2s; }
   .footer-links a:hover { color:var(--gold); }
   .success-msg { display:none; background:rgba(94,220,130,.1); border:1px solid rgba(94,220,130,.3); color:var(--green); padding:1rem 1.5rem; font-size:.9rem; margin-top:1rem; font-family:'Barlow Condensed',sans-serif; letter-spacing:.06em; text-transform:uppercase; }
+  .error-msg { display:none; background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.3); color:#ff6b6b; padding:.8rem 1.2rem; font-size:.82rem; margin-top:.6rem; }
   @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
   @keyframes ticker { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
   .divider { height:1px; background:var(--border); max-width:1000px; margin:0 auto; }
@@ -123,7 +125,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Built by a trucker &nbsp;·&nbsp; For truckers &nbsp;·&nbsp; Soap Lake, WA</div>
+    <div class="hero-eyebrow">Built by a trucker &nbsp;·&nbsp; For owner-operators &nbsp;·&nbsp; Soap Lake, WA</div>
     <h1 class="hero-title">
       <span class="line-white">Fire Your</span>
       <span class="line-green">Dispatcher.</span>
@@ -131,16 +133,19 @@
     </h1>
     <p class="hero-sub">RoadCommand is the personal dispatcher app built in the cab of a Peterbilt 579. Real profit calculation. Live loads. GPS deadhead. AI negotiation. No middleman.</p>
     <div class="hero-math">
-      <div class="math-item"><span class="math-num red">$28,000</span><span class="math-label">Dispatcher / Year</span></div>
+      <div class="math-item"><span class="math-num red">$14,400</span><span class="math-label">Dispatcher / Year</span></div>
       <span class="math-vs">VS</span>
       <div class="math-item"><span class="math-num green">$2,364</span><span class="math-label">RoadCommand / Year</span></div>
-      <div class="math-save"><span class="math-save-num">$25,636</span><span class="math-save-label">Back in your pocket</span></div>
+      <div class="math-save"><span class="math-save-num">$12,036</span><span class="math-save-label">Back in your pocket</span></div>
     </div>
     <form class="hero-form" id="hero-form" onsubmit="handleSignup(event,'hero')">
-      <input class="hero-input" type="email" placeholder="Your email address" required>
-      <button class="hero-btn" type="submit">Get Early Access</button>
+      <input class="hero-input" type="email" name="email" placeholder="Your email address" required>
+      <input type="hidden" name="source" value="hero">
+      <input type="hidden" name="_subject" value="New RoadCommand Early Access Signup">
+      <button class="hero-btn" type="submit" id="hero-btn">Get Early Access</button>
     </form>
     <div class="success-msg" id="hero-success">✓ You are on the list. We will be in touch.</div>
+    <div class="error-msg" id="hero-error">Something went wrong. Email us at admin@roadcommand.co</div>
     <p class="hero-fine">Free 30-day beta access. No credit card required.</p>
   </div>
 </section>
@@ -179,9 +184,9 @@
 <section class="section">
   <div class="section-label">The Problem</div>
   <h2 class="section-title">Your Dispatcher Is <em>The Most Expensive</em> Employee You Have</h2>
-  <p class="section-body">The average dispatcher takes 8 to 10 percent of every load you haul. On a $15,000 month that is $1,500 gone before you pay a single bill. Over a year that is $18,000 walking out the door — for someone else to find loads you could find yourself.</p>
+  <p class="section-body">The average dispatcher takes 8 to 10 percent of every load you haul. On a $15,000 month that is $1,200 gone before you pay a single bill. Over a year that is $14,400 walking out the door — for someone else to find loads you could find yourself.</p>
   <div class="stat-grid">
-    <div class="stat-card"><span class="stat-number">$18K</span><div class="stat-desc">Average annual dispatcher cost for an owner-operator grossing $15K/month</div></div>
+    <div class="stat-card"><span class="stat-number">$14.4K</span><div class="stat-desc">Average annual dispatcher cost for an owner-operator grossing $15K/month at 8%</div></div>
     <div class="stat-card"><span class="stat-number">25%</span><div class="stat-desc">Broker margin on your load — the cut they take before you see a dollar</div></div>
     <div class="stat-card"><span class="stat-number">350K</span><div class="stat-desc">Owner-operators in the US running their own authority right now</div></div>
     <div class="stat-card"><span class="stat-number">$197</span><div class="stat-desc">What RoadCommand costs per month — everything included, no dispatcher needed</div></div>
@@ -266,7 +271,7 @@
       <div class="built-name">Levi Bergquist</div>
       <div class="built-title">Founder, RoadCommand &nbsp;·&nbsp; Owner-Operator</div>
       <p class="built-body">Running a 2018 Peterbilt 579 out of Soap Lake, Washington. Built RoadCommand from the cab between runs because every dispatcher tool on the market was built for brokers, not drivers. This one is different. It was built for you.</p>
-      <div class="built-truck">Levi & Dylan Sprague &nbsp;·&nbsp; 2018 Peterbilt 579 &nbsp;·&nbsp; Soap Lake, WA</div>
+      <div class="built-truck">Owner-Operator &nbsp;·&nbsp; 2018 Peterbilt 579 &nbsp;·&nbsp; Soap Lake, WA</div>
     </div>
   </div>
 </div>
@@ -277,10 +282,13 @@
     <h2 class="cta-title">Ready To Keep <span style="color:var(--green);">Your Money?</span></h2>
     <p class="cta-sub">Get full access free for 30 days. No credit card. No dispatcher. No middleman.</p>
     <form class="cta-form" id="cta-form" onsubmit="handleSignup(event,'cta')">
-      <input class="hero-input" type="email" placeholder="Your email address" required style="min-width:240px;">
-      <button class="hero-btn" type="submit">Start Free Trial</button>
+      <input class="hero-input" type="email" name="email" placeholder="Your email address" required style="min-width:240px;">
+      <input type="hidden" name="source" value="cta">
+      <input type="hidden" name="_subject" value="New RoadCommand Early Access Signup">
+      <button class="hero-btn" type="submit" id="cta-btn">Start Free Trial</button>
     </form>
     <div class="success-msg" id="cta-success">✓ You are on the list. We will be in touch.</div>
+    <div class="error-msg" id="cta-error">Something went wrong. Email us at admin@roadcommand.co</div>
     <p class="hero-fine" style="margin-top:.8rem;">$197/month after trial. Cancel anytime. Owner-operators with their own authority only.</p>
   </div>
 </section>
@@ -296,17 +304,39 @@
 </footer>
 
 <script>
-var signups = [];
-function handleSignup(e, source) {
+async function handleSignup(e, source) {
   e.preventDefault();
   var form = e.target;
-  var email = form.querySelector('input[type="email"]').value;
-  if (!email) return;
-  signups.push({ email: email, source: source, date: new Date().toISOString() });
+  var btnId = source === 'hero' ? 'hero-btn' : 'cta-btn';
   var successId = source === 'hero' ? 'hero-success' : 'cta-success';
-  document.getElementById(successId).style.display = 'block';
-  form.reset();
-  console.log('New signup:', email, 'from:', source);
+  var errorId = source === 'hero' ? 'hero-error' : 'cta-error';
+  var btn = document.getElementById(btnId);
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  document.getElementById(errorId).style.display = 'none';
+
+  var data = new FormData(form);
+
+  try {
+    var response = await fetch('https://formspree.io/f/xrerwozz', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      document.getElementById(successId).style.display = 'block';
+      form.reset();
+      btn.disabled = false;
+      btn.textContent = source === 'hero' ? 'Get Early Access' : 'Start Free Trial';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = source === 'hero' ? 'Get Early Access' : 'Start Free Trial';
+    document.getElementById(errorId).style.display = 'block';
+  }
 }
 function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
 </script>

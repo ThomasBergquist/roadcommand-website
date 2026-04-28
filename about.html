@@ -25,7 +25,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .mobile-menu a { color:var(--text); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.1rem; letter-spacing:.06em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid var(--border); }
 @media(max-width:700px) { .nav-links { display:none; } .nav-hamburger { display:block; } .nav-cta { display:none; } }
 
-/* HERO */
 .page-hero { padding:9rem 2rem 5rem; position:relative; overflow:hidden; }
 .page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 30% 50%, rgba(94,220,130,0.05) 0%, transparent 70%); z-index:0; }
 .hero-grid { position:relative; z-index:1; max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
@@ -46,7 +45,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .stat-val.green { color:var(--green); }
 .stat-val.gold { color:var(--gold); }
 
-/* STORY */
 .story-section { padding:5rem 2rem; max-width:800px; margin:0 auto; }
 .story-block { margin-bottom:3.5rem; }
 .story-label { font-family:'Barlow Condensed',sans-serif; font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem; }
@@ -59,7 +57,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .pull-quote p { font-family:'Barlow Condensed',sans-serif; font-size:1.3rem; font-weight:600; color:var(--text); line-height:1.4; }
 .pull-quote p em { font-style:normal; color:var(--gold); }
 
-/* MISSION */
 .mission-section { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:5rem 2rem; }
 .mission-inner { max-width:800px; margin:0 auto; text-align:center; }
 .mission-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,6vw,4rem); letter-spacing:.04em; margin-bottom:1.5rem; }
@@ -71,7 +68,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .value-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text); margin-bottom:.4rem; }
 .value-desc { font-size:.82rem; color:var(--muted); line-height:1.6; }
 
-/* CTA */
 .cta-section { padding:6rem 2rem; text-align:center; }
 .cta-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,7vw,5rem); letter-spacing:.04em; margin-bottom:1rem; }
 .cta-sub { font-size:1rem; color:var(--muted); margin-bottom:2rem; font-weight:300; }
@@ -112,8 +108,8 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
     <div>
       <div class="hero-eyebrow">Built From The Cab</div>
       <h1 class="hero-title">Not A Tech <em>Company.</em> A Trucker.</h1>
-      <p class="hero-body">I did not raise venture capital. I did not rent office space. My brother Dylan and I built our trucking operation from the ground up in Soap Lake, Washington — and I built RoadCommand between runs, in the cab of my Peterbilt 579, because we needed it and it did not exist.</p>
-      <div class="hero-truck">2018 Peterbilt 579 &nbsp;·&nbsp; Soap Lake, WA &nbsp;·&nbsp; Levi & Dylan Sprague</div>
+      <p class="hero-body">I did not raise venture capital. I did not rent office space. I built my trucking operation from the ground up in Soap Lake, Washington — and I built RoadCommand between runs, in the cab of my Peterbilt 579, because I needed it and it did not exist.</p>
+      <div class="hero-truck">2018 Peterbilt 579 &nbsp;·&nbsp; Soap Lake, WA &nbsp;·&nbsp; Owner-Operator</div>
     </div>
     <div class="hero-card">
       <div class="hero-card-label">The Operator Behind RoadCommand</div>
@@ -122,7 +118,6 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
       <div class="stat-row"><span class="stat-key">Truck</span><span class="stat-val gold">2018 Peterbilt 579</span></div>
       <div class="stat-row"><span class="stat-key">Home Base</span><span class="stat-val">Soap Lake, WA</span></div>
       <div class="stat-row"><span class="stat-key">Authority</span><span class="stat-val green">Own MC Number</span></div>
-      <div class="stat-row"><span class="stat-key">Co-Founder</span><span class="stat-val gold">Dylan Sprague</span></div>
       <div class="stat-row"><span class="stat-key">Built RoadCommand</span><span class="stat-val green">2026</span></div>
     </div>
   </div>
@@ -133,7 +128,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
     <div class="story-label">How It Started</div>
     <h2 class="story-heading">I Was Tired of <em>Paying Someone Else</em> To Find My Loads</h2>
     <p class="story-text">
-      Dylan and I have run our own authority together out of Soap Lake, Washington for years. Two brothers, one truck, no dispatcher — just us making decisions on every load, every lane, every negotiation. That is the operation RoadCommand was built to support.</p>
+      I have run my own authority out of Soap Lake, Washington for years. My own truck, my own decisions on every load, every lane, every negotiation. That is the operation RoadCommand was built to support.</p>
     <p class="story-text">
       Running your own authority is supposed to mean freedom. Freedom to choose your loads, your lanes, your schedule. But somewhere along the way that freedom got eaten up by dispatcher fees, broker margins, and the constant mental math of trying to figure out if a load was actually worth taking.
     </p>
@@ -191,7 +186,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 <section class="cta-section">
   <div class="story-label" style="text-align:center;">Ready To Run Smarter</div>
   <h2 class="cta-title">Fire Your Dispatcher.<br><span style="color:var(--green);">Keep Your Money.</span></h2>
-  <p class="cta-sub">First 15 owner-operators get 30 days free. No credit card. No dispatcher. No middleman. Built by truckers for truckers.</p>
+  <p class="cta-sub">Owner-operators get 30 days free. No credit card. No dispatcher. No middleman. Built by a trucker for truckers.</p>
   <a href="beta.html" class="cta-btn">Apply For Beta Access →</a>
 </section>
 

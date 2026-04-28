@@ -34,7 +34,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .contact-section { padding:4rem 2rem 6rem; max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1.4fr; gap:4rem; align-items:start; }
 @media(max-width:700px) { .contact-section { grid-template-columns:1fr; gap:2.5rem; } }
 
-.contact-info { }
 .info-block { margin-bottom:2.5rem; }
 .info-label { font-family:'Barlow Condensed',sans-serif; font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; }
 .info-value { font-size:1rem; color:var(--text); line-height:1.6; }
@@ -58,7 +57,9 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .form-textarea:focus { border-color:var(--green); }
 .submit-btn { width:100%; background:var(--green); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; letter-spacing:.08em; text-transform:uppercase; padding:1rem; border:none; cursor:pointer; transition:background .2s; }
 .submit-btn:hover { background:#7aeda0; }
+.submit-btn:disabled { opacity:.6; cursor:not-allowed; }
 .success-msg { display:none; background:rgba(94,220,130,.1); border:1px solid rgba(94,220,130,.3); color:var(--green); padding:1.5rem; font-size:.95rem; text-align:center; font-family:'Barlow Condensed',sans-serif; letter-spacing:.06em; text-transform:uppercase; line-height:1.6; margin-top:1rem; }
+.error-msg { display:none; background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.3); color:#ff6b6b; padding:1rem; font-size:.85rem; text-align:center; margin-top:.8rem; line-height:1.5; }
 
 footer { background:var(--surface); border-top:1px solid var(--border); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
 .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.12em; color:var(--green); }
@@ -92,14 +93,14 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
   <div class="page-hero-content">
     <div class="page-eyebrow">We Actually Answer</div>
     <h1 class="page-title">Talk To A <em>Real</em> Trucker.</h1>
-    <p class="page-sub">No support tickets. No chatbots. You email us and Levi responds personally. That is it.</p>
+    <p class="page-sub">No automated replies. No runaround. You send a message and a real person responds. That is how we operate.</p>
   </div>
 </div>
 
 <section class="contact-section">
   <div class="contact-info">
     <div class="response-card">
-      <p><strong>We respond within 24 hours</strong> Monday through Friday. If you email on a weekend we might be rolling somewhere on I-90 but we will get back to you.</p>
+      <p><strong>We respond within 24 hours</strong> Monday through Friday. If you reach out on a weekend we might be rolling somewhere on I-90 but we will get back to you.</p>
     </div>
 
     <div class="info-block">
@@ -117,7 +118,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
     <div class="info-block">
       <div class="info-label">For Beta Access</div>
       <div class="info-value"><a href="beta.html">Apply on the Beta page →</a></div>
-      <div class="info-sub">Fastest way to get access — 15 spots available</div>
+      <div class="info-sub">Fastest way to get access — spots available now</div>
     </div>
 
     <div class="info-block">
@@ -127,7 +128,7 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
     </div>
 
     <div class="info-block">
-      <div class="info-label">For Press & Media</div>
+      <div class="info-label">For Press &amp; Media</div>
       <div class="info-value"><a href="mailto:admin@roadcommand.co">admin@roadcommand.co</a></div>
       <div class="info-sub">A trucker who built a SaaS company from his cab. We have a story to tell.</div>
     </div>
@@ -135,16 +136,16 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 
   <div class="contact-form-card">
     <div class="form-title">Send A Message</div>
-    <p class="form-sub">Fill this out and Levi will respond personally within 24 hours.</p>
+    <p class="form-sub">Fill this out and our team will respond within 24 hours.</p>
     <form id="contact-form" onsubmit="handleContact(event)">
       <label class="form-label">Your Name</label>
-      <input class="form-input" type="text" placeholder="First and last name" required>
+      <input class="form-input" type="text" name="name" placeholder="First and last name" required>
 
       <label class="form-label">Email Address</label>
-      <input class="form-input" type="email" placeholder="you@email.com" required>
+      <input class="form-input" type="email" name="email" placeholder="you@email.com" required>
 
       <label class="form-label">What is this about?</label>
-      <select class="form-select">
+      <select class="form-select" name="subject">
         <option>Beta Access</option>
         <option>General Question</option>
         <option>Technical Support</option>
@@ -154,13 +155,16 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
       </select>
 
       <label class="form-label">Message</label>
-      <textarea class="form-textarea" placeholder="What is on your mind?" required></textarea>
+      <textarea class="form-textarea" name="message" placeholder="What is on your mind?" required></textarea>
 
-      <button class="submit-btn" type="submit">Send Message →</button>
+      <input type="hidden" name="_subject" value="New RoadCommand Contact Form Message">
+
+      <button class="submit-btn" type="submit" id="contact-submit-btn">Send Message →</button>
+      <div class="error-msg" id="contact-error">Something went wrong. Please email us directly at admin@roadcommand.co</div>
     </form>
     <div class="success-msg" id="contact-success">
       ✓ Message received.<br>
-      Levi will respond within 24 hours.<br>
+      We will respond within 24 hours.<br>
       <span style="font-size:.8rem;opacity:.8;">Check your spam folder if you do not hear back.</span>
     </div>
   </div>
@@ -177,10 +181,34 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 </footer>
 <script>
 function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
-function handleContact(e){
+
+async function handleContact(e){
   e.preventDefault();
-  document.getElementById('contact-form').style.display='none';
-  document.getElementById('contact-success').style.display='block';
+  var btn = document.getElementById('contact-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  document.getElementById('contact-error').style.display = 'none';
+
+  var form = document.getElementById('contact-form');
+  var data = new FormData(form);
+
+  try {
+    var response = await fetch('https://formspree.io/f/xrerwozz', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+    document.getElementById('contact-error').style.display = 'block';
+  }
 }
 </script>
 </body>
