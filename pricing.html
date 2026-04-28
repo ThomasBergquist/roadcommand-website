@@ -25,7 +25,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .mobile-menu a { color:var(--text); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.1rem; letter-spacing:.06em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid var(--border); }
 @media(max-width:700px) { .nav-links { display:none; } .nav-hamburger { display:block; } .nav-cta { display:none; } }
 
-/* PAGE */
 .page-hero { padding:9rem 2rem 4rem; text-align:center; position:relative; overflow:hidden; }
 .page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(94,220,130,0.06) 0%, transparent 70%); z-index:0; }
 .page-hero-content { position:relative; z-index:1; max-width:700px; margin:0 auto; }
@@ -34,34 +33,23 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .page-title em { font-style:normal; color:var(--green); }
 .page-sub { font-size:1.05rem; font-weight:300; color:var(--muted); line-height:1.7; }
 
-/* PRICING */
-.pricing-section { padding:4rem 2rem 6rem; max-width:1100px; margin:0 auto; }
-.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.5rem; margin-top:3rem; }
+.pricing-section { padding:4rem 2rem 6rem; max-width:700px; margin:0 auto; }
 
-.plan-card { background:var(--surface); border:1px solid var(--border); padding:2rem 1.8rem; display:flex; flex-direction:column; position:relative; transition:transform .2s, border-color .2s; }
-.plan-card:hover { transform:translateY(-3px); }
-.plan-card.featured { border-color:var(--green-border); background:rgba(94,220,130,0.04); }
-.plan-card.featured::before { content:'MOST POPULAR'; position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--green); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.15em; padding:.25rem 1rem; white-space:nowrap; }
+.plan-card { background:var(--surface); border:2px solid var(--green-border); padding:3rem 2.5rem; display:flex; flex-direction:column; position:relative; background:rgba(94,220,130,0.04); }
+.plan-card::before { content:'COMPLETE DISPATCHER REPLACEMENT'; position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--green); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.15em; padding:.25rem 1.5rem; white-space:nowrap; }
 
-.plan-badge { font-family:'Barlow Condensed',sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem; }
-.plan-name { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.06em; margin-bottom:.3rem; }
-.plan-price { font-family:'Bebas Neue',sans-serif; font-size:3.2rem; letter-spacing:.04em; color:var(--green); line-height:1; margin-bottom:.3rem; }
-.plan-price span { font-size:1.2rem; color:var(--muted); font-family:'Barlow',sans-serif; font-weight:300; }
-.plan-desc { font-size:.85rem; color:var(--muted); line-height:1.6; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.plan-name { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; letter-spacing:.06em; margin-bottom:.3rem; margin-top:.5rem; }
+.plan-price { font-family:'Bebas Neue',sans-serif; font-size:4.5rem; letter-spacing:.04em; color:var(--green); line-height:1; margin-bottom:.3rem; }
+.plan-price span { font-size:1.4rem; color:var(--muted); font-family:'Barlow',sans-serif; font-weight:300; }
+.plan-desc { font-size:.95rem; color:var(--muted); line-height:1.7; margin-bottom:2rem; padding-bottom:2rem; border-bottom:1px solid var(--border); }
 
-.plan-features { list-style:none; margin-bottom:2rem; flex:1; }
-.plan-features li { font-size:.88rem; color:var(--muted); padding:.45rem 0; display:flex; align-items:flex-start; gap:.6rem; line-height:1.4; }
+.plan-features { list-style:none; margin-bottom:2.5rem; flex:1; display:grid; grid-template-columns:1fr 1fr; gap:.1rem; }
+@media(max-width:500px) { .plan-features { grid-template-columns:1fr; } }
+.plan-features li { font-size:.88rem; color:var(--muted); padding:.5rem 0; display:flex; align-items:flex-start; gap:.6rem; line-height:1.4; }
 .plan-features li::before { content:'✓'; color:var(--green); font-weight:bold; flex-shrink:0; margin-top:.1rem; }
-.plan-features li.muted::before { content:'—'; color:var(--border); }
-.plan-features li.muted { opacity:.4; }
 
-.plan-btn { display:block; text-align:center; padding:.85rem; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background .2s; cursor:pointer; border:none; }
-.plan-btn-green { background:var(--green); color:#000; }
-.plan-btn-green:hover { background:#7aeda0; }
-.plan-btn-gold { background:var(--gold); color:#000; }
-.plan-btn-gold:hover { background:#ffe07a; }
-.plan-btn-outline { background:transparent; color:var(--text); border:1px solid var(--border); }
-.plan-btn-outline:hover { border-color:var(--green); color:var(--green); }
+.plan-btn { display:block; text-align:center; padding:1.1rem; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.15rem; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background .2s; cursor:pointer; border:none; background:var(--gold); color:#000; }
+.plan-btn:hover { background:#ffe07a; }
 
 .beta-banner { background:rgba(255,208,77,.06); border:1px solid rgba(255,208,77,.2); padding:1.5rem 2rem; text-align:center; margin-bottom:3rem; }
 .beta-banner strong { color:var(--gold); font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.06em; display:block; margin-bottom:.4rem; }
@@ -70,6 +58,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .compare-note { text-align:center; margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border); }
 .compare-note p { font-size:.9rem; color:var(--muted); line-height:1.7; }
 .compare-note strong { color:var(--green); }
+
+.math-box { background:var(--surface2); border:1px solid var(--border); padding:2rem; margin-top:3rem; text-align:center; }
+.math-box .math-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.06em; color:var(--gold); margin-bottom:1rem; }
+.math-row { display:flex; justify-content:space-between; align-items:center; padding:.6rem 0; border-bottom:1px solid var(--border); font-size:.9rem; color:var(--muted); }
+.math-row:last-child { border-bottom:none; }
+.math-row strong { color:var(--text); }
+.math-row.total strong { color:var(--green); font-size:1.1rem; }
+.math-row.savings strong { color:var(--gold); font-size:1.1rem; }
 
 footer { background:var(--surface); border-top:1px solid var(--border); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-top:2rem; }
 .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.12em; color:var(--green); }
@@ -103,8 +99,8 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 <div class="page-hero">
   <div class="page-hero-content">
     <div class="page-eyebrow">Simple, Transparent Pricing</div>
-    <h1 class="page-title">Less Than One <em>Load.</em></h1>
-    <p class="page-sub">Every plan pays for itself the moment it helps you negotiate one better rate or avoid one bad load. No contracts. Cancel anytime.</p>
+    <h1 class="page-title">One Price. <em>Everything.</em></h1>
+    <p class="page-sub">No tiers. No feature gating. No upsells. One subscription gets you the complete dispatcher replacement — every tool, every AI feature, everything we build going forward.</p>
   </div>
 </div>
 
@@ -112,84 +108,60 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 
   <div class="beta-banner">
     <strong>🚛 Beta Access — Free for 30 Days</strong>
-    <p>First 15 owner-operators get full Command tier access at no cost. No credit card required. In exchange we ask for honest feedback and a testimonial. <a href="beta.html" style="color:var(--gold);">Apply for beta →</a></p>
+    <p>First owner-operators get full access at no cost. No credit card required. We ask for honest feedback in return. <a href="beta.html" style="color:var(--gold);">Apply for beta →</a></p>
   </div>
 
-  <div class="pricing-grid">
+  <div class="plan-card">
+    <div class="plan-name">Command</div>
+    <div class="plan-price">$197<span>/mo</span></div>
+    <p class="plan-desc">The complete RoadCommand experience. Every feature built and every feature we build next. Your dispatcher charges $1,500 a month. This is $197. No contract. Cancel anytime.</p>
+    <ul class="plan-features">
+      <li>Live GPS location tracking</li>
+      <li>Real-time diesel prices by region</li>
+      <li>Crowdsourced pump prices</li>
+      <li>Live NWS road weather alerts</li>
+      <li>AI morning dispatch briefing</li>
+      <li>Real net profit calculator</li>
+      <li>GPS deadhead cost calculation</li>
+      <li>Load board with profit bars</li>
+      <li>HOS-compliant arrival calculator</li>
+      <li>Return load finder (Loadback)</li>
+      <li>Broker scorecard database</li>
+      <li>Rate negotiation coach</li>
+      <li>AI word-for-word negotiation scripts</li>
+      <li>AI load decision advisor</li>
+      <li>Route intelligence briefings</li>
+      <li>Broker vault with search</li>
+      <li>Invoice and payment tracker</li>
+      <li>BOL and Rate Con document storage</li>
+      <li>Monthly tax export with attachments</li>
+      <li>Annual tax export ZIP</li>
+      <li>AI invoice chase assistant</li>
+      <li>Weekly AI business summary</li>
+      <li>Maintenance cost tracker</li>
+      <li>Lane planner</li>
+      <li>State freight volume tracker</li>
+      <li>Load document tracker</li>
+      <li>Run history logbook</li>
+      <li>Odometer tracking</li>
+      <li>Text size and display settings</li>
+      <li>Direct line to the founder</li>
+    </ul>
+    <a href="beta.html" class="plan-btn">Get 30 Days Free →</a>
+  </div>
 
-    <!-- BASIC -->
-    <div class="plan-card">
-      <div class="plan-badge">Starter</div>
-      <div class="plan-name">Basic</div>
-      <div class="plan-price">$99<span>/mo</span></div>
-      <p class="plan-desc">The essential load evaluation toolkit. Find better loads and know your real profit before you book.</p>
-      <ul class="plan-features">
-        <li>Live load board access</li>
-        <li>Real net profit calculator</li>
-        <li>GPS deadhead cost calculation</li>
-        <li>Live diesel prices by region</li>
-        <li>Load skip and book actions</li>
-        <li>Basic weekly stats dashboard</li>
-        <li class="muted">HOS arrival calculator</li>
-        <li class="muted">Return load finder</li>
-        <li class="muted">Broker scorecard</li>
-        <li class="muted">Rate negotiation coach</li>
-        <li class="muted">Invoice tracker</li>
-        <li class="muted">Maintenance cost tracker</li>
-      </ul>
-      <a href="beta.html" class="plan-btn plan-btn-outline">Get Started</a>
-    </div>
-
-    <!-- PRO -->
-    <div class="plan-card">
-      <div class="plan-badge">Most Value</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price">$139<span>/mo</span></div>
-      <p class="plan-desc">The full intelligence layer. Everything you need to run smarter routes and negotiate every load with confidence.</p>
-      <ul class="plan-features">
-        <li>Everything in Basic</li>
-        <li>HOS-compliant arrival calculator</li>
-        <li>Return load finder</li>
-        <li>Broker scorecard database</li>
-        <li>Rate negotiation coach</li>
-        <li>Word-for-word counter-offer scripts</li>
-        <li>Weather and road alerts</li>
-        <li>Lane rate database</li>
-        <li>Nearest load finder</li>
-        <li class="muted">Invoice tracker</li>
-        <li class="muted">Maintenance cost tracker</li>
-        <li class="muted">Document tracker</li>
-      </ul>
-      <a href="beta.html" class="plan-btn plan-btn-outline">Get Started</a>
-    </div>
-
-    <!-- COMMAND -->
-    <div class="plan-card featured">
-      <div class="plan-badge">Complete Dispatcher Replacement</div>
-      <div class="plan-name">Command</div>
-      <div class="plan-price">$197<span>/mo</span></div>
-      <p class="plan-desc">The complete RoadCommand experience. Every feature, every tool, every advantage. Your dispatcher costs $1,500/month. This costs $197.</p>
-      <ul class="plan-features">
-        <li>Everything in Pro</li>
-        <li>Invoice and payment tracker</li>
-        <li>Overdue payment alerts</li>
-        <li>Maintenance cost tracker</li>
-        <li>Load document tracker</li>
-        <li>States volume tracker</li>
-        <li>YTD earnings and run history</li>
-        <li>Full loadback return finder</li>
-        <li>Broker payment history log</li>
-        <li>Priority support</li>
-        <li>First access to new features</li>
-        <li>Direct line to the founder</li>
-      </ul>
-      <a href="beta.html" class="plan-btn plan-btn-gold">Get Beta Free →</a>
-    </div>
-
+  <div class="math-box">
+    <div class="math-title">The Math Is Simple</div>
+    <div class="math-row"><span>Traditional dispatcher fee (8% on $15k/mo gross)</span><strong style="color:var(--red);">-$1,200/mo</strong></div>
+    <div class="math-row"><span>RoadCommand Command plan</span><strong>$197/mo</strong></div>
+    <div class="math-row savings"><span>You keep every month</span><strong>$1,003 more</strong></div>
+    <div class="math-row total"><span>RoadCommand pays for itself with</span><strong>one negotiation</strong></div>
   </div>
 
   <div class="compare-note">
-    <p>A dispatcher charges 8–10% per load. On a <strong>$15,000/month</strong> gross that is <strong>$1,500 gone</strong> before you pay a single bill.<br>RoadCommand Command is <strong>$197/month.</strong> The math does not lie.</p>
+    <p>No contracts. No setup fees. No per-load charges.<br>
+    Cancel anytime — your data exports with you.<br>
+    <strong>Built by an owner-operator. Priced for owner-operators.</strong></p>
   </div>
 
 </section>
