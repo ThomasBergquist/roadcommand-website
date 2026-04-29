@@ -23,7 +23,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .mobile-menu.open { display:flex; }
 .mobile-menu a { color:var(--text); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.1rem; letter-spacing:.06em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid var(--border); }
 @media(max-width:700px) { .nav-links { display:none; } .nav-hamburger { display:block; } .nav-cta { display:none; } }
-
 .page-hero { padding:9rem 2rem 4rem; text-align:center; position:relative; overflow:hidden; }
 .page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,208,77,0.05) 0%, transparent 70%); z-index:0; }
 .page-hero-content { position:relative; z-index:1; max-width:700px; margin:0 auto; }
@@ -31,21 +30,20 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .page-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,9vw,6rem); line-height:1; letter-spacing:.04em; margin-bottom:1rem; }
 .page-title em { font-style:normal; color:var(--gold); }
 .page-sub { font-size:1.05rem; font-weight:300; color:var(--muted); line-height:1.7; }
-
 .beta-section { padding:4rem 2rem 6rem; max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
 @media(max-width:700px) { .beta-section { grid-template-columns:1fr; gap:2.5rem; } }
-
 .beta-what-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.04em; margin-bottom:1rem; color:var(--gold); }
 .beta-list { list-style:none; margin-bottom:2rem; }
 .beta-list li { padding:.6rem 0; border-bottom:1px solid var(--border); font-size:.95rem; color:var(--muted); display:flex; gap:.8rem; align-items:flex-start; }
 .beta-list li::before { content:'✓'; color:var(--green); flex-shrink:0; font-weight:bold; }
 .beta-list li strong { color:var(--text); }
-
+.spots-counter { background:var(--green-dim); border:1px solid var(--green-border); padding:1.2rem 1.5rem; margin-bottom:2rem; }
+.spots-num { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--green); letter-spacing:.04em; display:block; line-height:1; }
+.spots-label { font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--green); opacity:.8; }
 .ask-title { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.04em; margin-bottom:.8rem; color:var(--text); }
 .ask-list { list-style:none; }
 .ask-list li { padding:.5rem 0; font-size:.88rem; color:var(--muted); display:flex; gap:.6rem; }
 .ask-list li::before { content:'→'; color:var(--gold); flex-shrink:0; }
-
 .beta-form-card { background:var(--surface); border:1px solid var(--green-border); padding:2.5rem; }
 .form-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.04em; color:var(--green); margin-bottom:.4rem; }
 .form-sub { font-size:.85rem; color:var(--muted); margin-bottom:2rem; line-height:1.6; }
@@ -53,7 +51,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .form-input { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; transition:border-color .2s; margin-bottom:1.2rem; }
 .form-input:focus { border-color:var(--green); }
 .form-input::placeholder { color:rgba(240,244,240,.3); }
-.form-select { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; margin-bottom:1.2rem; }
+.form-select { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; margin-bottom:1.2rem; -webkit-appearance:none; }
 .form-textarea { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; resize:vertical; min-height:100px; margin-bottom:1.2rem; }
 .form-textarea:focus { border-color:var(--green); }
 .submit-btn { width:100%; background:var(--gold); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; letter-spacing:.08em; text-transform:uppercase; padding:1rem; border:none; cursor:pointer; transition:background .2s; }
@@ -61,8 +59,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify
 .submit-btn:disabled { opacity:.6; cursor:not-allowed; }
 .form-fine { font-size:.72rem; color:var(--muted); margin-top:.8rem; text-align:center; line-height:1.5; }
 .success-msg { display:none; background:rgba(94,220,130,.1); border:1px solid rgba(94,220,130,.3); color:var(--green); padding:1.5rem; font-size:.95rem; text-align:center; font-family:'Barlow Condensed',sans-serif; letter-spacing:.06em; text-transform:uppercase; line-height:1.6; }
-.error-msg { display:none; background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.3); color:#ff6b6b; padding:1rem; font-size:.85rem; text-align:center; margin-top:.8rem; line-height:1.5; }
-
+.error-msg { display:none; background:rgba(255,126,126,.1); border:1px solid rgba(255,126,126,.3); color:#ff7e7e; padding:1rem; font-size:.85rem; margin-bottom:1rem; line-height:1.5; }
 footer { background:var(--surface); border-top:1px solid var(--border); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
 .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.12em; color:var(--green); }
 .footer-logo span { color:var(--gold); }
@@ -93,25 +90,29 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
 
 <div class="page-hero">
   <div class="page-hero-content">
-    <div class="page-eyebrow">Beta Access — Owner-Operators Only</div>
+    <div class="page-eyebrow">Limited Beta — Owner-Operators Only</div>
     <h1 class="page-title">30 Days <em>Free.</em><br>Zero Strings.</h1>
-    <p class="page-sub">We are looking for owner-operators to test RoadCommand before public launch. Full Command tier access — every feature — completely free for 30 days.</p>
+    <p class="page-sub">We are looking for owner-operators to test RoadCommand before public launch. Full access — every feature — completely free for 30 days.</p>
   </div>
 </div>
 
 <section class="beta-section">
   <div class="beta-details">
+    <div class="spots-counter">
+      <span class="spots-num">Limited</span>
+      <span class="spots-label">Beta spots — Apply now, we will be in touch</span>
+    </div>
+
     <div class="beta-what-title">What You Get</div>
     <ul class="beta-list">
-      <li><strong>Full Command tier access</strong> — every single feature unlocked</li>
-      <li><strong>Live load board</strong> — real loads from real brokers</li>
+      <li><strong>Full access</strong> — every single feature unlocked</li>
       <li><strong>Real net profit</strong> on every load after fuel and deadhead</li>
       <li><strong>GPS deadhead calculator</strong> — knows where you are</li>
       <li><strong>HOS arrival time</strong> — full FMCSA rules applied</li>
       <li><strong>Return load finder</strong> — best backhaul ranked by round-trip profit</li>
-      <li><strong>Broker scorecard</strong> and rate negotiation coaching</li>
+      <li><strong>Broker scorecard</strong> and AI rate negotiation coaching</li>
       <li><strong>Invoice tracker</strong> so brokers never go past 30 days</li>
-      <li><strong>Priority support</strong> — real responses from a real trucker</li>
+      <li><strong>Priority support from our team</strong></li>
       <li><strong>30 days completely free</strong> — no credit card required</li>
     </ul>
 
@@ -128,18 +129,20 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
     <div class="form-title">Apply For Beta</div>
     <p class="form-sub">Fill this out and we will be in touch within 24 hours. Owner-operators with their own authority only.</p>
 
-    <form id="beta-form" onsubmit="handleBeta(event)">
-      <label class="form-label">Full Name</label>
-      <input class="form-input" type="text" name="name" placeholder="Levi Bergquist" required>
+    <div class="error-msg" id="beta-error"></div>
 
-      <label class="form-label">Email Address</label>
-      <input class="form-input" type="email" name="email" placeholder="you@email.com" required>
+    <form id="beta-form" onsubmit="handleBeta(event)">
+      <label class="form-label">Full Name *</label>
+      <input class="form-input" id="beta-name" type="text" placeholder="Levi Bergquist" required>
+
+      <label class="form-label">Email Address *</label>
+      <input class="form-input" id="beta-email" type="email" placeholder="you@email.com" required>
 
       <label class="form-label">Phone Number</label>
-      <input class="form-input" type="tel" name="phone" placeholder="(509) 555-0100">
+      <input class="form-input" id="beta-phone" type="tel" placeholder="(509) 555-0100">
 
       <label class="form-label">Equipment Type</label>
-      <select class="form-select" name="equipment">
+      <select class="form-select" id="beta-equipment">
         <option>Dry Van</option>
         <option>Flatbed</option>
         <option>Reefer</option>
@@ -149,28 +152,25 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
       </select>
 
       <label class="form-label">Home Base (City, State)</label>
-      <input class="form-input" type="text" name="home_base" placeholder="Soap Lake, WA">
+      <input class="form-input" id="beta-homebase" type="text" placeholder="Soap Lake, WA">
 
       <label class="form-label">Do you currently use a dispatcher?</label>
-      <select class="form-select" name="dispatcher_status">
+      <select class="form-select" id="beta-dispatcher">
         <option>Yes — looking to replace them</option>
         <option>No — self dispatch already</option>
         <option>Sometimes — depends on the week</option>
       </select>
 
       <label class="form-label">Anything else you want us to know?</label>
-      <textarea class="form-textarea" name="notes" placeholder="Tell us about your operation, your lanes, what you are looking for..."></textarea>
-
-      <input type="hidden" name="_subject" value="New RoadCommand Beta Application">
+      <textarea class="form-textarea" id="beta-notes" placeholder="Tell us about your operation, your lanes, what you are looking for..."></textarea>
 
       <button class="submit-btn" type="submit" id="beta-submit-btn">Apply For Beta Access →</button>
       <p class="form-fine">By applying you agree to sign a one-page NDA before receiving access. No credit card. No commitment after 30 days.</p>
-      <div class="error-msg" id="beta-error">Something went wrong. Please email us directly at admin@roadcommand.co</div>
     </form>
     <div class="success-msg" id="beta-success">
       ✓ Application received.<br>
       We will review and be in touch within 24 hours.<br>
-      <span style="font-size:.8rem;opacity:.8;">Check admin@roadcommand.co if you do not hear back.</span>
+      <span style="font-size:.8rem;opacity:.8;">Check your spam if you do not hear back.</span>
     </div>
   </div>
 </section>
@@ -184,35 +184,61 @@ footer { background:var(--surface); border-top:1px solid var(--border); padding:
     <a href="terms.html#privacy">Privacy</a>
   </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
 
-async function handleBeta(e){
+var SUPABASE_URL      = 'https://kaxspubuhzpqgbomvcmo.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtheHNwdWJ1aHpwcWdib212Y21vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5ODU4NzgsImV4cCI6MjA5MjU2MTg3OH0._5mvIKv2ZhtDRzT2yLf8NeDH8VseqKy47g9nXczXndM';
+var _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function handleBeta(e) {
   e.preventDefault();
-  var btn = document.getElementById('beta-submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  document.getElementById('beta-error').style.display = 'none';
 
-  var form = document.getElementById('beta-form');
-  var data = new FormData(form);
+  var name       = document.getElementById('beta-name').value.trim();
+  var email      = document.getElementById('beta-email').value.trim();
+  var phone      = document.getElementById('beta-phone').value.trim();
+  var equipment  = document.getElementById('beta-equipment').value;
+  var homebase   = document.getElementById('beta-homebase').value.trim();
+  var dispatcher = document.getElementById('beta-dispatcher').value;
+  var notes      = document.getElementById('beta-notes').value.trim();
+  var btn        = document.getElementById('beta-submit-btn');
+  var errorEl    = document.getElementById('beta-error');
+
+  errorEl.style.display = 'none';
+  btn.textContent = 'Submitting...';
+  btn.disabled    = true;
+
+  var extraNotes = [phone, homebase, dispatcher, notes].filter(Boolean).join(' | ');
 
   try {
-    var response = await fetch('https://formspree.io/f/xrerwozz', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
+    var result = await _sb.from('waitlist').insert({
+      name:       name,
+      email:      email,
+      truck_type: equipment,
+      status:     'waiting',
+      notes:      extraNotes
     });
-    if (response.ok) {
-      form.style.display = 'none';
-      document.getElementById('beta-success').style.display = 'block';
-    } else {
-      throw new Error('Server error');
+
+    if (result.error) {
+      // Duplicate email — still show success, no need to alarm them
+      if (result.error.code === '23505') {
+        document.getElementById('beta-form').style.display = 'none';
+        document.getElementById('beta-success').style.display = 'block';
+        return;
+      }
+      throw result.error;
     }
-  } catch(err) {
-    btn.disabled = false;
+
+    document.getElementById('beta-form').style.display = 'none';
+    document.getElementById('beta-success').style.display = 'block';
+
+  } catch (err) {
+    errorEl.textContent = 'Something went wrong. Please email admin@roadcommand.co directly.';
+    errorEl.style.display = 'block';
     btn.textContent = 'Apply For Beta Access →';
-    document.getElementById('beta-error').style.display = 'block';
+    btn.disabled    = false;
   }
 }
 </script>
