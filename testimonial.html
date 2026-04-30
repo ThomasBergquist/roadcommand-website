@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beta Wrap-Up — RoadCommand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --green:#5edc82; --gold:#ffd04d; --dark:#0e1210; --surface:#161a16; --surface2:#1e241e; --border:rgba(255,255,255,0.08); --text:#f0f4f0; --muted:rgba(240,244,240,0.55); --green-dim:rgba(94,220,130,0.08); --green-border:rgba(94,220,130,0.25); --red:#ff6b6b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--dark); color:var(--text); font-family:'Barlow',sans-serif; overflow-x:hidden; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; background:rgba(14,18,16,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); gap:1rem; }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.12em; color:var(--green); text-decoration:none; }
+.nav-logo span { color:var(--gold); }
+.nav-hamburger { display:none; background:none; border:none; color:var(--gold); font-size:1.4rem; cursor:pointer; }
+.mobile-menu { display:none; position:fixed; top:64px; left:0; right:0; background:var(--surface); border-bottom:1px solid var(--border); z-index:99; flex-direction:column; padding:1rem 2rem; gap:1rem; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { color:var(--text); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.1rem; letter-spacing:.06em; text-transform:uppercase; padding:.5rem 0; border-bottom:1px solid var(--border); }
+
+.page-hero { padding:9rem 2rem 4rem; text-align:center; position:relative; overflow:hidden; }
+.page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,208,77,0.06) 0%, transparent 70%); z-index:0; }
+.page-hero-content { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+.page-eyebrow { font-family:'Barlow Condensed',sans-serif; font-size:.8rem; font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+.page-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,9vw,5.5rem); line-height:1; letter-spacing:.04em; margin-bottom:1rem; }
+.page-title em { font-style:normal; color:var(--green); }
+.page-sub { font-size:1rem; font-weight:300; color:var(--muted); line-height:1.7; }
+
+.form-section { padding:3rem 2rem 6rem; max-width:720px; margin:0 auto; }
+
+.form-card { background:var(--surface); border:1px solid var(--border); padding:2.5rem; margin-bottom:1.5rem; }
+.form-card-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:.04em; color:var(--gold); margin-bottom:.3rem; }
+.form-card-sub { font-size:.85rem; color:var(--muted); margin-bottom:1.8rem; line-height:1.6; }
+
+.form-label { font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:.4rem; font-family:'Barlow Condensed',sans-serif; font-weight:600; }
+.form-input { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; transition:border-color .2s; margin-bottom:1.2rem; }
+.form-input:focus { border-color:var(--green); }
+.form-input::placeholder { color:rgba(240,244,240,.3); }
+.form-textarea { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; resize:vertical; margin-bottom:1.2rem; transition:border-color .2s; }
+.form-textarea:focus { border-color:var(--green); }
+.form-textarea::placeholder { color:rgba(240,244,240,.3); }
+.form-select { width:100%; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--text); font-family:'Barlow',sans-serif; font-size:.95rem; padding:.8rem 1rem; outline:none; margin-bottom:1.2rem; -webkit-appearance:none; }
+.form-hint { font-size:.75rem; color:var(--muted); margin-top:-.8rem; margin-bottom:1.2rem; font-style:italic; }
+
+/* STAR RATING */
+.star-group { display:flex; gap:.5rem; margin-bottom:1.2rem; flex-direction:row-reverse; justify-content:flex-end; }
+.star-group input { display:none; }
+.star-group label { font-size:1.8rem; cursor:pointer; color:rgba(255,255,255,.15); transition:color .15s; }
+.star-group input:checked ~ label,
+.star-group label:hover,
+.star-group label:hover ~ label { color:var(--gold); }
+
+/* SCALE RATING */
+.scale-group { display:flex; gap:.4rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+.scale-group input { display:none; }
+.scale-group label { width:42px; height:42px; display:flex; align-items:center; justify-content:center; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--muted); font-size:.88rem; font-weight:600; cursor:pointer; transition:all .15s; border-radius:3px; }
+.scale-group input:checked + label { background:var(--green-dim); border-color:var(--green-border); color:var(--green); }
+.scale-group label:hover { border-color:var(--green-border); color:var(--green); }
+.scale-ends { display:flex; justify-content:space-between; margin-top:-.8rem; margin-bottom:1.2rem; }
+.scale-ends span { font-size:.68rem; color:var(--muted); font-style:italic; }
+
+/* CHECKBOX GROUP */
+.check-group { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:1.2rem; }
+@media(max-width:500px) { .check-group { grid-template-columns:1fr; } }
+.check-item { display:flex; align-items:center; gap:.6rem; padding:.6rem .8rem; background:var(--dark); border:1px solid rgba(255,255,255,.12); cursor:pointer; border-radius:3px; transition:border-color .15s; }
+.check-item:hover { border-color:var(--green-border); }
+.check-item input { accent-color:var(--green); width:16px; height:16px; cursor:pointer; }
+.check-item span { font-size:.85rem; color:var(--muted); }
+
+/* YES/NO TOGGLE */
+.yesno-group { display:flex; gap:.5rem; margin-bottom:1.2rem; }
+.yesno-group input { display:none; }
+.yesno-group label { flex:1; text-align:center; padding:.7rem; background:var(--dark); border:1px solid rgba(255,255,255,.12); color:var(--muted); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.95rem; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; transition:all .15s; border-radius:3px; }
+.yesno-group input:checked + label { background:var(--green-dim); border-color:var(--green-border); color:var(--green); }
+
+/* TESTIMONIAL BOX */
+.testimonial-box { background:var(--green-dim); border:1px solid var(--green-border); padding:1.5rem; margin-bottom:1.5rem; }
+.testimonial-box p { font-size:.88rem; color:var(--text); line-height:1.7; }
+.testimonial-box strong { color:var(--green); }
+
+.submit-btn { width:100%; background:var(--gold); color:#000; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.15rem; letter-spacing:.08em; text-transform:uppercase; padding:1.1rem; border:none; cursor:pointer; transition:background .2s; margin-top:.5rem; }
+.submit-btn:hover { background:#ffe07a; }
+.submit-btn:disabled { opacity:.6; cursor:not-allowed; }
+
+.success-msg { display:none; background:rgba(94,220,130,.1); border:1px solid rgba(94,220,130,.3); color:var(--green); padding:2rem; font-size:1rem; text-align:center; font-family:'Barlow Condensed',sans-serif; letter-spacing:.06em; text-transform:uppercase; line-height:1.8; border-radius:3px; }
+.error-msg { display:none; background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.3); color:var(--red); padding:1rem; font-size:.85rem; margin-bottom:1rem; line-height:1.5; }
+
+.divider { height:1px; background:var(--border); margin:2rem 0; }
+
+.privacy-note { font-size:.72rem; color:var(--muted); text-align:center; margin-top:1rem; line-height:1.6; font-style:italic; }
+
+footer { background:var(--surface); border-top:1px solid var(--border); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.12em; color:var(--green); }
+.footer-logo span { color:var(--gold); }
+.footer-copy { font-size:.78rem; color:var(--muted); }
+.footer-links { display:flex; gap:1.5rem; }
+.footer-links a { font-size:.78rem; color:var(--muted); text-decoration:none; letter-spacing:.06em; text-transform:uppercase; }
+.footer-social { display:flex; gap:1rem; align-items:center; }
+.social-link { color:var(--muted); transition:color .2s; display:flex; align-items:center; }
+.social-link:hover { color:var(--gold); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Road<span>Command</span></a>
+  <button class="nav-hamburger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="beta.html" onclick="toggleMenu()">Beta</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="page-eyebrow">Beta Complete — Final Debrief</div>
+    <h1 class="page-title">You Made It.<br><em>Thank You.</em></h1>
+    <p class="page-sub">This is the last thing we ask. 10 minutes of honest feedback helps us build something that actually works for every driver who comes after you.</p>
+  </div>
+</div>
+
+<section class="form-section">
+  <div class="error-msg" id="form-error">Something went wrong. Please email your feedback directly to admin@roadcommand.co</div>
+
+  <form id="wrap-form" onsubmit="handleSubmit(event)">
+
+    <!-- SECTION 1 — WHO YOU ARE -->
+    <div class="form-card">
+      <div class="form-card-title">1. About You</div>
+      <div class="form-card-sub">So we know who this feedback is coming from. Your info stays private.</div>
+
+      <label class="form-label">Your Name *</label>
+      <input class="form-input" id="f-name" type="text" placeholder="First and last name" required>
+
+      <label class="form-label">Email Address *</label>
+      <input class="form-input" id="f-email" type="email" placeholder="you@email.com" required>
+
+      <label class="form-label">Your Home Base</label>
+      <input class="form-input" id="f-homebase" type="text" placeholder="City, State">
+
+      <label class="form-label">Equipment Type</label>
+      <select class="form-select" id="f-equipment">
+        <option>Dry Van</option>
+        <option>Flatbed</option>
+        <option>Reefer</option>
+        <option>Step Deck</option>
+        <option>Power Only</option>
+        <option>Other</option>
+      </select>
+
+      <label class="form-label">How many loads did you run during beta?</label>
+      <select class="form-select" id="f-loads">
+        <option>1 - 3 loads</option>
+        <option>4 - 7 loads</option>
+        <option>8 - 15 loads</option>
+        <option>15+ loads</option>
+      </select>
+    </div>
+
+    <!-- SECTION 2 — OVERALL RATING -->
+    <div class="form-card">
+      <div class="form-card-title">2. Overall Experience</div>
+      <div class="form-card-sub">How was RoadCommand overall? Be honest — this is more useful than a polished answer.</div>
+
+      <label class="form-label">Overall Rating</label>
+      <div class="star-group">
+        <input type="radio" name="overall-star" id="s5" value="5"><label for="s5">★</label>
+        <input type="radio" name="overall-star" id="s4" value="4"><label for="s4">★</label>
+        <input type="radio" name="overall-star" id="s3" value="3"><label for="s3">★</label>
+        <input type="radio" name="overall-star" id="s2" value="2"><label for="s2">★</label>
+        <input type="radio" name="overall-star" id="s1" value="1"><label for="s1">★</label>
+      </div>
+
+      <label class="form-label">How likely are you to recommend RoadCommand to another owner-operator?</label>
+      <div class="scale-group">
+        <input type="radio" name="recommend" id="r0" value="0"><label for="r0">0</label>
+        <input type="radio" name="recommend" id="r1" value="1"><label for="r1">1</label>
+        <input type="radio" name="recommend" id="r2" value="2"><label for="r2">2</label>
+        <input type="radio" name="recommend" id="r3" value="3"><label for="r3">3</label>
+        <input type="radio" name="recommend" id="r4" value="4"><label for="r4">4</label>
+        <input type="radio" name="recommend" id="r5" value="5"><label for="r5">5</label>
+        <input type="radio" name="recommend" id="r6" value="6"><label for="r6">6</label>
+        <input type="radio" name="recommend" id="r7" value="7"><label for="r7">7</label>
+        <input type="radio" name="recommend" id="r8" value="8"><label for="r8">8</label>
+        <input type="radio" name="recommend" id="r9" value="9"><label for="r9">9</label>
+        <input type="radio" name="recommend" id="r10" value="10"><label for="r10">10</label>
+      </div>
+      <div class="scale-ends"><span>Not at all</span><span>Absolutely</span></div>
+
+      <label class="form-label">In one sentence — what is RoadCommand?</label>
+      <input class="form-input" id="f-oneliner" type="text" placeholder="Describe it like you would to another driver at a truckstop">
+      <div class="form-hint">This helps us understand how drivers actually talk about the product</div>
+    </div>
+
+    <!-- SECTION 3 — FEATURES -->
+    <div class="form-card">
+      <div class="form-card-title">3. Features</div>
+      <div class="form-card-sub">Tell us what you actually used and what made a difference.</div>
+
+      <label class="form-label">Which features did you use regularly? (check all that apply)</label>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox" name="features" value="Profit Calculator"> <span>Profit Calculator</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="AI Negotiation Script"> <span>AI Negotiation Script</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Broker Scorecard"> <span>Broker Scorecard</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Return Load Finder"> <span>Return Load Finder</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="HOS Checker"> <span>HOS Checker</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Invoice Tracker"> <span>Invoice Tracker</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="FMCSA Authority Health"> <span>FMCSA Authority Health</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Command Score"> <span>Command Score</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Live Diesel Price"> <span>Live Diesel Price</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Lane Planner"> <span>Lane Planner</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Maintenance Tracker"> <span>Maintenance Tracker</span></label>
+        <label class="check-item"><input type="checkbox" name="features" value="Weather Alerts"> <span>Weather Alerts</span></label>
+      </div>
+
+      <label class="form-label">What was the single most valuable feature?</label>
+      <input class="form-input" id="f-best-feature" type="text" placeholder="The one thing you could not imagine going without">
+
+      <label class="form-label">What feature needs the most work?</label>
+      <input class="form-input" id="f-worst-feature" type="text" placeholder="Be direct — this is how we improve">
+
+      <label class="form-label">What feature is missing that you needed?</label>
+      <textarea class="form-textarea" id="f-missing" rows="3" placeholder="Something you looked for that was not there"></textarea>
+    </div>
+
+    <!-- SECTION 4 — REAL RESULTS -->
+    <div class="form-card">
+      <div class="form-card-title">4. Real Results</div>
+      <div class="form-card-sub">The numbers that matter. We are not looking for inflated answers — honest results help us market accurately.</div>
+
+      <label class="form-label">Did RoadCommand help you negotiate a better rate on any load?</label>
+      <div class="yesno-group">
+        <input type="radio" name="neg-win" id="neg-yes" value="Yes"><label for="neg-yes">Yes</label>
+        <input type="radio" name="neg-win" id="neg-no" value="No"><label for="neg-no">No</label>
+        <input type="radio" name="neg-win" id="neg-na" value="Did not try"><label for="neg-na">Did Not Try</label>
+      </div>
+
+      <label class="form-label">If yes — roughly how much more did you get on your best negotiation?</label>
+      <input class="form-input" id="f-neg-amount" type="text" placeholder="e.g. $150 more, $300 more, etc.">
+
+      <label class="form-label">Did you discover anything about your FMCSA record you did not know?</label>
+      <div class="yesno-group">
+        <input type="radio" name="fmcsa-discovery" id="fd-yes" value="Yes"><label for="fd-yes">Yes</label>
+        <input type="radio" name="fmcsa-discovery" id="fd-no" value="No"><label for="fd-no">No</label>
+      </div>
+
+      <label class="form-label">Did using RoadCommand change how you evaluate loads?</label>
+      <div class="yesno-group">
+        <input type="radio" name="changed-eval" id="ce-yes" value="Yes"><label for="ce-yes">Yes</label>
+        <input type="radio" name="changed-eval" id="ce-no" value="No"><label for="ce-no">No</label>
+        <input type="radio" name="changed-eval" id="ce-some" value="Somewhat"><label for="ce-some">Somewhat</label>
+      </div>
+
+      <label class="form-label">Tell us about one specific moment where RoadCommand made a difference on a real load.</label>
+      <textarea class="form-textarea" id="f-story" rows="4" placeholder="Walk us through it — what happened, what you did, what the result was. As specific as you can be."></textarea>
+      <div class="form-hint">This is the most valuable thing you can give us. Real stories from real drivers.</div>
+    </div>
+
+    <!-- SECTION 5 — MOBILE EXPERIENCE -->
+    <div class="form-card">
+      <div class="form-card-title">5. Using It On The Road</div>
+      <div class="form-card-sub">RoadCommand is built for mobile. We need to know if it actually works in the cab.</div>
+
+      <label class="form-label">How easy was the app to use on your phone in the cab?</label>
+      <div class="scale-group">
+        <input type="radio" name="ease" id="e1" value="1"><label for="e1">1</label>
+        <input type="radio" name="ease" id="e2" value="2"><label for="e2">2</label>
+        <input type="radio" name="ease" id="e3" value="3"><label for="e3">3</label>
+        <input type="radio" name="ease" id="e4" value="4"><label for="e4">4</label>
+        <input type="radio" name="ease" id="e5" value="5"><label for="e5">5</label>
+        <input type="radio" name="ease" id="e6" value="6"><label for="e6">6</label>
+        <input type="radio" name="ease" id="e7" value="7"><label for="e7">7</label>
+        <input type="radio" name="ease" id="e8" value="8"><label for="e8">8</label>
+        <input type="radio" name="ease" id="e9" value="9"><label for="e9">9</label>
+        <input type="radio" name="ease" id="e10" value="10"><label for="e10">10</label>
+      </div>
+      <div class="scale-ends"><span>Very difficult</span><span>Extremely easy</span></div>
+
+      <label class="form-label">Did you experience any bugs or issues?</label>
+      <textarea class="form-textarea" id="f-bugs" rows="3" placeholder="Describe anything that did not work right — what happened, what screen you were on"></textarea>
+
+      <label class="form-label">What device and browser did you use?</label>
+      <input class="form-input" id="f-device" type="text" placeholder="e.g. iPhone 14, Safari / Android, Chrome">
+    </div>
+
+    <!-- SECTION 6 — THE $197 QUESTION -->
+    <div class="form-card">
+      <div class="form-card-title">6. The Money Question</div>
+      <div class="form-card-sub">We need honest answers here more than anywhere else.</div>
+
+      <label class="form-label">Would you pay $197/month for RoadCommand after beta?</label>
+      <div class="yesno-group">
+        <input type="radio" name="would-pay" id="wp-yes" value="Yes — absolutely"><label for="wp-yes">Yes</label>
+        <input type="radio" name="would-pay" id="wp-maybe" value="Maybe — depends"><label for="wp-maybe">Maybe</label>
+        <input type="radio" name="would-pay" id="wp-no" value="No"><label for="wp-no">No</label>
+      </div>
+
+      <label class="form-label">If maybe or no — what price would feel right to you?</label>
+      <input class="form-input" id="f-price-point" type="text" placeholder="e.g. $99/month, $149/month, etc.">
+
+      <label class="form-label">What would make you say yes without hesitation?</label>
+      <textarea class="form-textarea" id="f-yes-trigger" rows="3" placeholder="A specific feature, improvement, or proof point that would make it a no-brainer"></textarea>
+
+      <label class="form-label">Compared to what you were doing before — is RoadCommand worth the money?</label>
+      <div class="yesno-group">
+        <input type="radio" name="worth-it" id="wi-yes" value="Yes — saves more than it costs"><label for="wi-yes">Yes</label>
+        <input type="radio" name="worth-it" id="wi-maybe" value="Maybe — getting there"><label for="wi-maybe">Maybe</label>
+        <input type="radio" name="worth-it" id="wi-no" value="Not yet"><label for="wi-no">Not Yet</label>
+      </div>
+    </div>
+
+    <!-- SECTION 7 — TESTIMONIAL -->
+    <div class="form-card">
+      <div class="form-card-title">7. Your Testimonial</div>
+      <div class="form-card-sub">This is optional but incredibly valuable. If RoadCommand helped you, say so in your own words. We will use this on the website and in marketing with your permission.</div>
+
+      <div class="testimonial-box">
+        <p><strong>What makes a great testimonial:</strong> Specific. A dollar amount, a time saved, a broker you negotiated better with. "It helped me" is weak. "I got $200 more on a Moses Lake to Boise run using the AI script" is powerful. Write it the way you would tell another driver at a truckstop.</p>
+      </div>
+
+      <label class="form-label">Your Testimonial (optional)</label>
+      <textarea class="form-textarea" id="f-testimonial" rows="5" placeholder="Write it like you are talking to another driver. Specific, real, honest."></textarea>
+
+      <label class="form-label">May we use your testimonial on the RoadCommand website and in marketing?</label>
+      <div class="yesno-group">
+        <input type="radio" name="permission" id="p-yes" value="Yes — use my name and quote"><label for="p-yes">Yes, use my name</label>
+        <input type="radio" name="permission" id="p-anon" value="Yes — anonymous only"><label for="p-anon">Anonymous only</label>
+        <input type="radio" name="permission" id="p-no" value="No — private"><label for="p-no">Keep it private</label>
+      </div>
+
+      <label class="form-label">Would you be willing to do a 5-minute video testimonial?</label>
+      <div class="yesno-group">
+        <input type="radio" name="video" id="v-yes" value="Yes"><label for="v-yes">Yes</label>
+        <input type="radio" name="video" id="v-maybe" value="Maybe"><label for="v-maybe">Maybe</label>
+        <input type="radio" name="video" id="v-no" value="No"><label for="v-no">No</label>
+      </div>
+    </div>
+
+    <!-- SECTION 8 — FINAL THOUGHTS -->
+    <div class="form-card">
+      <div class="form-card-title">8. Final Thoughts</div>
+      <div class="form-card-sub">Anything else on your mind. No filter needed.</div>
+
+      <label class="form-label">If you could change one thing about RoadCommand what would it be?</label>
+      <textarea class="form-textarea" id="f-change" rows="3" placeholder="One thing. The most important thing."></textarea>
+
+      <label class="form-label">Is there another owner-operator you think should try RoadCommand?</label>
+      <input class="form-input" id="f-referral-name" type="text" placeholder="Their name (optional)">
+      <input class="form-input" id="f-referral-contact" type="text" placeholder="Their phone or email (optional)">
+      <div class="form-hint">We will reach out to them directly — they will get beta pricing as a thank you to you</div>
+
+      <label class="form-label">Anything else you want us to know?</label>
+      <textarea class="form-textarea" id="f-anything" rows="4" placeholder="Open field — say whatever you need to say"></textarea>
+    </div>
+
+    <button class="submit-btn" type="submit" id="submit-btn">Submit My Beta Feedback →</button>
+    <p class="privacy-note">Your responses are confidential. We will never share your information without permission. Testimonials will only be used publicly if you gave explicit permission above.</p>
+
+  </form>
+
+  <div class="success-msg" id="form-success">
+    ✓ Feedback received. Thank you.<br><br>
+    <span style="font-size:.85rem;opacity:.85;">You helped build something real. We will be in touch about your continued access and beta pricing before the public launch.</span><br><br>
+    <a href="index.html" style="color:var(--green);font-size:.85rem;">← Back to RoadCommand</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Road<span>Command</span></div>
+  <div class="footer-copy">© 2026 RoadCommand LLC · Soap Lake, WA · All rights reserved</div>
+  <div class="footer-links">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms</a>
+  </div>
+  <div class="footer-social">
+    <a href="https://instagram.com/roadcommandhq" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://tiktok.com/@roadcommandhq" target="_blank" rel="noopener" class="social-link" aria-label="TikTok">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+
+var SUPABASE_URL      = 'https://kaxspubuhzpqgbomvcmo.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtheHNwdWJ1aHpwcWdib212Y21vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5ODU4NzgsImV4cCI6MjA5MjU2MTg3OH0._5mvIKv2ZhtDRzT2yLf8NeDH8VseqKy47g9nXczXndM';
+var _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+function getRadioVal(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : '';
+}
+
+function getChecked(name) {
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function(el) { return el.value; }).join(', ');
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submit-btn');
+  var errorEl = document.getElementById('form-error');
+  errorEl.style.display = 'none';
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  var name       = document.getElementById('f-name').value.trim();
+  var email      = document.getElementById('f-email').value.trim();
+  var homebase   = document.getElementById('f-homebase').value.trim();
+  var equipment  = document.getElementById('f-equipment').value;
+  var loads      = document.getElementById('f-loads').value;
+  var overallStar = getRadioVal('overall-star');
+  var recommend  = getRadioVal('recommend');
+  var oneliner   = document.getElementById('f-oneliner').value.trim();
+  var features   = getChecked('features');
+  var bestFeat   = document.getElementById('f-best-feature').value.trim();
+  var worstFeat  = document.getElementById('f-worst-feature').value.trim();
+  var missing    = document.getElementById('f-missing').value.trim();
+  var negWin     = getRadioVal('neg-win');
+  var negAmount  = document.getElementById('f-neg-amount').value.trim();
+  var fmcsaDisc  = getRadioVal('fmcsa-discovery');
+  var changedEval = getRadioVal('changed-eval');
+  var story      = document.getElementById('f-story').value.trim();
+  var ease       = getRadioVal('ease');
+  var bugs       = document.getElementById('f-bugs').value.trim();
+  var device     = document.getElementById('f-device').value.trim();
+  var wouldPay   = getRadioVal('would-pay');
+  var pricePoint = document.getElementById('f-price-point').value.trim();
+  var yesTrigger = document.getElementById('f-yes-trigger').value.trim();
+  var worthIt    = getRadioVal('worth-it');
+  var testimonial = document.getElementById('f-testimonial').value.trim();
+  var permission = getRadioVal('permission');
+  var video      = getRadioVal('video');
+  var change     = document.getElementById('f-change').value.trim();
+  var refName    = document.getElementById('f-referral-name').value.trim();
+  var refContact = document.getElementById('f-referral-contact').value.trim();
+  var anything   = document.getElementById('f-anything').value.trim();
+
+  var payload = {
+    name, email, homebase, equipment, loads_run: loads,
+    overall_stars: overallStar, nps_score: recommend, one_liner: oneliner,
+    features_used: features, best_feature: bestFeat, worst_feature: worstFeat, missing_feature: missing,
+    negotiation_win: negWin, negotiation_amount: negAmount,
+    fmcsa_discovery: fmcsaDisc, changed_eval: changedEval, real_story: story,
+    mobile_ease: ease, bugs: bugs, device: device,
+    would_pay: wouldPay, price_point: pricePoint, yes_trigger: yesTrigger, worth_it: worthIt,
+    testimonial: testimonial, testimonial_permission: permission, video_willing: video,
+    change_one_thing: change, referral_name: refName, referral_contact: refContact,
+    anything_else: anything,
+    submitted_at: new Date().toISOString()
+  };
+
+  try {
+    // Save to Supabase
+    var result = await _sb.from('beta_testimonials').insert(payload);
+    if (result.error) throw result.error;
+
+    // Notify via Formspree
+    try {
+      await fetch('https://formspree.io/f/xrerwozz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '🚛 Beta Wrap-Up Submitted — ' + name,
+          name, email, overall_stars: overallStar, nps: recommend,
+          would_pay: wouldPay, testimonial: testimonial || '(none)',
+          best_feature: bestFeat, real_story: story || '(none)',
+          video_willing: video
+        })
+      });
+    } catch(e) {}
+
+    document.getElementById('wrap-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch(err) {
+    errorEl.textContent = 'Something went wrong. Please email your feedback directly to admin@roadcommand.co';
+    errorEl.style.display = 'block';
+    btn.textContent = 'Submit My Beta Feedback →';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
