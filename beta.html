@@ -231,6 +231,26 @@ async function handleBeta(e) {
       throw result.error;
     }
 
+    // Silent Formspree notification — sends Levi an instant email on every new application
+    try {
+      await fetch('https://formspree.io/f/xrerwozz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '🚛 New Beta Application — ' + name,
+          name: name,
+          email: email,
+          phone: phone || '—',
+          equipment: equipment,
+          homebase: homebase,
+          dispatcher: dispatcher,
+          notes: notes || '—'
+        })
+      });
+    } catch(e) {
+      // Notification failure is silent — Supabase record already saved
+    }
+
     document.getElementById('beta-form').style.display = 'none';
     document.getElementById('beta-success').style.display = 'block';
 
